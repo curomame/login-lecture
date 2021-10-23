@@ -1,6 +1,7 @@
 "use strict";
 
 
+
 const output = {
 
   home : (req, res) => {
@@ -13,9 +14,28 @@ const output = {
 
 }
 
+const users = {
+  id : ["lee", "kim", "park"],
+  pwd : ["1234", "123", "1235"]
+};
+
 const process = {
   login : (req,res) =>{
-    console.log(req.body);
+    const id = req.body.id,
+      pwd = req.body.pwd;
+
+    if (users.id.includes(id)){
+      const idx = users.id.indexOf(id);
+      if(users.pwd[idx] === pwd){
+        return res.json({
+          success : true,
+        })
+      }
+    }
+    return res.json({
+      success : false,
+      msg : "로그인에 실패하였습니다.",
+    });
   }
 }
 

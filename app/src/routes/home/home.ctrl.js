@@ -1,6 +1,6 @@
 "use strict";
 
-const UserStorage = require("../../models/UserStorage")
+const User = require("../../models/User");
 
 const output = {
 
@@ -18,34 +18,14 @@ const output = {
 
 }
 
-// const users = {
-//   id : ["lee", "kim", "park"],
-//   pwd : ["1234", "123", "1235"]
-// };
-// modles / userstorage.js로 모델 생성
 
 const process = {
   login : (req,res) =>{
-    const id = req.body.id,
-      pwd = req.body.pwd;
 
-    const users = UserStorage.getUsers("id","pwd");
-
-    const response = {};
-
-    if (users.id.includes(id)){
-      const idx = users.id.indexOf(id);
-      if(users.pwd[idx] === pwd){
-        response.success = true;
-        return res.json(response)
-      }
-    }
-
-    //change test
-    response.success = false;
-    response.msg = '로그인에 실패하였습니다.'
+    const user = new User(req.body);
+    const response = user.login();
     return res.json(response);
-
+    
   }
 }
 
@@ -54,6 +34,8 @@ module.exports = {
   output,
   process
 }
+
+
 
 /*
 오브젝트는 원래 key 와 value 로 구성되는데

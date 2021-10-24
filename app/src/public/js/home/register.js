@@ -3,20 +3,24 @@
 const id  = document.querySelector('#id'),
   name  = document.querySelector('#name'),
   pwd  = document.querySelector('#pwd'),
-  confirPwd  = document.querySelector('#confirm-pwd'),
+  confirmPwd  = document.querySelector('#confirm-pwd'),
   registerbtn = document.querySelector('#button');
  
 
 registerbtn.addEventListener("click", register)
 
 function register(){
-  
+
+if (!id.balue) return alert("아이디를 입력해주세요!")
+
+if(pwd.value !== confirmPwd.value) return alert("입력한 비밀번호가 일치하지 않습니다.")
+
   const req = {
     id : id.value,
     name : name.value,
     pwd : pwd.value,
-    confirPwd : confirPwd.value,
   };
+
 
 
   fetch("/register",{

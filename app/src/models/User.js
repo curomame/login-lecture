@@ -10,7 +10,7 @@ class User {
 
   async login(){
     const client = this.body;
-    const {id, pwd } = await UserStorage.getUserInfo(client.id);
+    const { id, pwd } = await UserStorage.getUserInfo(client.id);
 
     if(id){
 
@@ -28,7 +28,7 @@ class User {
       const response = await UserStorage.save(client);
       return response;
     } catch (err) {
-      return { success : false, msg : err}    
+      return { success : false, msg : err}     
 }
 
   }
